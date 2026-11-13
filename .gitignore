@@ -2,5 +2,6 @@
 .venv/
 # La configuration de PyCharm
 .idea/
-data/
+datasets/
 models/
+__pycache__/
