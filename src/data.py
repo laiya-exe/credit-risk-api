@@ -1,6 +1,7 @@
 import pandas as pd
 
-def nettoyer_donnees(df : pd.DataFrame) -> pd.DataFrame:
+
+def nettoyer_donnees(df: pd.DataFrame) -> pd.DataFrame:
     """Regroupe les valeurs inconnues de EDUCATION et MARRIAGE"""
 
     df = df.copy()

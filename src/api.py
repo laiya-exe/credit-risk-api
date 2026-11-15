@@ -7,12 +7,13 @@ from src.data import nettoyer_donnees
 app = FastAPI()
 modele = joblib.load("models/RandomForest-model.joblib")
 
+
 class Client(BaseModel):
-    LIMIT_BAL: float = Field(ge=10000) # LIMIT_BAL min est 10000
-    SEX: int = Field(ge=1, le=2)    # 1 <= sexe <= 2
-    EDUCATION: int = Field(ge=0, le=6)    # 0 <= education <= 6
-    MARRIAGE: int = Field(ge=0, le=3)    # 0 <= marriage <= 3
-    AGE: int = Field(ge=21, le=100)    # 21 <= age <= 100
+    LIMIT_BAL: float = Field(ge=10000)  # LIMIT_BAL min est 10000
+    SEX: int = Field(ge=1, le=2)  # 1 <= sexe <= 2
+    EDUCATION: int = Field(ge=0, le=6)  # 0 <= education <= 6
+    MARRIAGE: int = Field(ge=0, le=3)  # 0 <= marriage <= 3
+    AGE: int = Field(ge=21, le=100)  # 21 <= age <= 100
     PAY_0: int
     PAY_2: int
     PAY_3: int
@@ -31,11 +32,12 @@ class Client(BaseModel):
     PAY_AMT4: float
     PAY_AMT5: float
     PAY_AMT6: float
-    
+
 
 @app.get("/health")
 def health():
-    return {'status': 'ok'}
+    return {"status": "ok"}
+
 
 @app.post("/predict")
 def predit(client: Client):
