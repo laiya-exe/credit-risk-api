@@ -1,0 +1,9 @@
+.vscode
+.idea
+.venv
+datasets/
+.git/
+notebooks/
+__pycache__/
+tests/
+.env
