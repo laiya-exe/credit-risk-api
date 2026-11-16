@@ -3,6 +3,5 @@
 # La configuration de PyCharm
 .idea/
 datasets/
-models/
 __pycache__/
 .env
