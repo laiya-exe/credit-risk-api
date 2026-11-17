@@ -4,9 +4,15 @@ import joblib
 import pandas as pd
 from src.data import nettoyer_donnees
 from src.db import enregistrer_prediction
+import psycopg
+import logging
 
 app = FastAPI()
 modele = joblib.load("models/RandomForest-model.joblib")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
+logger = logging.getLogger(__name__)
 
 
 class Client(BaseModel):
@@ -45,5 +51,10 @@ def predit(client: Client):
     tableau = pd.DataFrame([client.model_dump()])
     tableau = nettoyer_donnees(tableau)
     proba = modele.predict_proba(tableau)[0, 1]
-    enregistrer_prediction(client.model_dump(), float(proba))
+    try:
+        enregistrer_prediction(client.model_dump(), float(proba))
+    except psycopg.Error:
+        logger.exception(
+            "Échec de l'enregistrement de la prédiction en base de données"
+        )
     return {"probabilite_defaut": float(proba)}
