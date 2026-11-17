@@ -3,6 +3,7 @@ from pydantic import BaseModel, Field
 import joblib
 import pandas as pd
 from src.data import nettoyer_donnees
+from src.db import enregistrer_prediction
 
 app = FastAPI()
 modele = joblib.load("models/RandomForest-model.joblib")
@@ -44,4 +45,5 @@ def predit(client: Client):
     tableau = pd.DataFrame([client.model_dump()])
     tableau = nettoyer_donnees(tableau)
     proba = modele.predict_proba(tableau)[0, 1]
+    enregistrer_prediction(client.model_dump(), float(proba))
     return {"probabilite_defaut": float(proba)}
