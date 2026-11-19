@@ -2,6 +2,8 @@
 .venv/
 # La configuration de PyCharm
 .idea/
+.vscode/
 datasets/
 __pycache__/
 .env
+.pytest_cache
